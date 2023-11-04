@@ -1,55 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dokumen</title>
+    <title>Data Kategori</title>
 </head>
 <body>
-    <div class="box">
-<?php
-function Prima($p) {
-    if ($p <= 1) {
-        return false;
-    }
-    for ($i = 2; $i <= sqrt($p); $i++) {
-        if ($p % $i == 0) {
-            return false;
-        }
-    }
-    return true;
-}
-echo "Pengulangan Untuk Mencari kategori bilangan :<br><br>";
+    <h1>Data Kategori</h1>
+    <table border="1">
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Kategori</th>
+            <th>Keterangan</th>
+            <th>Gambar</th>
+        </tr>
 
-for($j = 1; $j < 20; $j++){
-    echo "<br>";
-    if( ($j % 2) == 0){
-        echo "&emsp;&emsp;•Angka $j adalah bilangan Genap";
-    }else {
-		echo "&emsp;&emsp;•Angka $j adalah bilangan Ganjil";
-	}	
+        <?php
+        $data = array(
+            "NRP123" => array("Nama 1", "Budaya Daerah di Indonesia", "Keterangan 1", "gambar1.jpg"),
+            "NRP234" => array("Nama 2", "Penemu-penemu terkenal di dunia", "Keterangan 2", "gambar2.jpg"),
+            "NRP345" => array("Nama 3", "Flora dan Fauna terancam punah", "Keterangan 3", "gambar3.jpg"),
+            "NRP456" => array("Nama 4", "Pahlawan Nasional Indonesia", "Keterangan 4", "gambar4.jpg"),
+            "NRP567" => array("Nama 5", "Perusahaan Teknologi", "Keterangan 5", "gambar5.jpg"),
+            // Tambahkan data lain sesuai kebutuhan
+        );
 
-    if (Prima($j)) {
-        if ($j > 10) {
-            echo " dan sekaligus bilangan prima";
-        } else {
-            echo " sekaligus bilangan prima";
+        $no = 1;
+        foreach ($data as $nrp => $info) {
+            $kategori = "";
+            $kategori_id = intval(substr($nrp, -3)) % 5;
+            switch ($kategori_id) {
+                case 1:
+                    $kategori = "Budaya Daerah di Indonesia";
+                    break;
+                case 2:
+                    $kategori = "Penemu-penemu terkenal di dunia";
+                    break;
+                case 3:
+                    $kategori = "Flora dan Fauna terancam punah";
+                    break;
+                case 4:
+                    $kategori = "Pahlawan Nasional Indonesia";
+                    break;
+                case 0:
+                    $kategori = "Perusahaan Teknologi";
+                    break;
+                default:
+                    $kategori = "Kategori Lain";
+            }
+
+            echo "<tr>";
+            echo "<td>$no</td>";
+            echo "<td>{$info[0]}</td>";
+            echo "<td>$kategori</td>";
+            echo "<td>{$info[2]}</td>";
+            echo "<td><img src='{$info[3]}' alt='Gambar'></td>";
+            echo "</tr>";
+            $no++;
         }
-    }
-      if($j >=1){
-        echo "<br>";
-      }else{
-        echo "";
-      }
-}
-?>
-    </div>
+        ?>
+
+    </table>
 </body>
-<style>
-    .box{
-        width: 600px;
-        height: 750px;
-        border: 2px solid black;
-    }
-</style>
 </html>
